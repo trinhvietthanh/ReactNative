@@ -2,8 +2,11 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialIcons, Ionicons,Entypo } from '@expo/vector-icons'; 
 
 import Header from "../shared/header";
-import DetailSceen from "../screens/news/DetailSceen";
-import SignInScreen from "../screens/account/SignInScreen";
+import DetailSceen from "../src/screens/news/DetailSceen";
+import TransferSceen from "../src/screens/transfer";
+import ScoreScreen from "../src/screens/scores";
+import SignInScreen from "../src/screens/account/SignInScreen";
+import UCLSceen from "../src/screens/UCL";
 import { Image, StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
@@ -45,17 +48,16 @@ const Tabs = () => {
           tabBarIcon: ({ color, size }) => (
             <MaterialIcons name="swap-horizontal-circle" size={size} color={color} />
           ),
-        }} component={DetailSceen}/>
+        }} component={TransferSceen}/>
       <Tab.Screen name="UCL"  options={{
           tabBarIcon: ({ color, size }) => (
             <Image source={require('../assets/icons/UCL.png')}  resizeMode="contain" style={{
               width: 30,
               height: 30,
-              
             }} />
           ),
-        }}component={DetailSceen}/>
-      <Tab.Screen name="Score" component={DetailSceen}  options={{
+        }}component={UCLSceen}/>
+      <Tab.Screen name="Score" component={ScoreScreen}  options={{
           tabBarLabel: 'Score',
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="football" size={size} color={color} />

@@ -1,8 +1,9 @@
 import React from "react";
-import Main from "./screens/main";
+import { NativeBaseProvider, Center } from "native-base";
+import Main from "./src/screens/main";
 import Tabs from "./navigation/tab";
 import Header from "./shared/header";
-import AppContainer from "./components/app-container";
+import AppContainer from "./src/components/app-container";
 import { Heading } from "native-base";
 // Define the config
 const config = {
