@@ -103,7 +103,7 @@ export default function ScoreScreen() {
       </VStack>
 
       <Center>
-        {/* <ScrollView
+        <ScrollView
           maxW="400"
           h="80"
           _contentContainerStyle={{
@@ -112,11 +112,11 @@ export default function ScoreScreen() {
             minW: "72",
             borderRadius: 8,
           }}
-        > */}
+        >
           <MatchCard/>
           <MatchCard/>
           <MatchCard/>
-        {/* </ScrollView> */}
+        </ScrollView>
       </Center>
     </Box>
   );

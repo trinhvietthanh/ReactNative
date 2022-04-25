@@ -9,10 +9,30 @@ import {
   Center,
   Heading,
   ScrollView,
+  FlatList,
 } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
 import BlockCard from "../../components/BlockCard";
+
+const newsData = [
+  {
+    id: 1,
+    title: "Card 1",
+    desciption: "Desc",
+  },
+  {
+    id: 2,
+    title: "Card 2",
+    desciption: "Desc",
+  },
+  {
+    id: 3,
+    title: "Card 3",
+    desciption: "Desc",
+  },
+];
+
 export default function DetailSceen() {
   return (
     <Box>
@@ -113,9 +133,13 @@ export default function DetailSceen() {
             borderRadius: 8,
           }}
         >
-          <BlockCard/>
-          <BlockCard/>
-          <BlockCard/>
+          <FlatList
+            data={newsData}
+            renderItem={({ item }) => (
+              <BlockCard title={item.title} description={item.desciption} />
+            )}
+            keyExtractor={(item) => item.id}
+          ></FlatList>
         </ScrollView>
       </Center>
     </Box>
