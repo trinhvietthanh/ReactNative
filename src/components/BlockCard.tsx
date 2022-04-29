@@ -8,7 +8,7 @@ import { FontAwesome } from '@expo/vector-icons';
 interface Props {
   title: string,
   description: string,
-  // image: string,
+  image: string,
 
 }
 
@@ -27,7 +27,7 @@ export default function BlockCard(props: Props) {
       <Box>
         <AspectRatio w="100%" ratio={16 / 9}>
           <Image source={{
-          uri: "https://www.holidify.com/images/cmsuploads/compressed/Bangalore_citycover_20190613234056.jpg"
+          uri: props.image
         }}  />
         </AspectRatio>
         <Center bg="violet.500" _dark={{

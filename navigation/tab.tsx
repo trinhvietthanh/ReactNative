@@ -50,8 +50,8 @@ const NewsScreenNavigator = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen name="NewsScreen" component={NewsScreen}/>
+      <Stack.Screen name="DetailScore" component={DetailSceen} />
     </Stack.Navigator>
-
   )
 }
 
