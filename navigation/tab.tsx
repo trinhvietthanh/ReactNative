@@ -8,6 +8,7 @@ import DetailScore from "../src/screens/scores/detailScoreScreen";
 import TransferSceen from "../src/screens/transfer";
 import ScoreScreen from "../src/screens/scores";
 import SignInScreen from "../src/screens/account/SignInScreen";
+import SignUpScreen from "../src/screens/account/SignUpScreen";
 import UCLSceen from "../src/screens/UCL";
 import NewsScreen from "../src/screens/news/NewsSceen";
 import { Image, StyleSheet } from "react-native";
@@ -119,7 +120,7 @@ const Tabs = () => {
       />
       <Tab.Screen
         name="Profile"
-        component={SignInScreen}
+        component={SignUpScreen}
         options={{
           headerShown: false,
           tabBarLabel: "Profile",
