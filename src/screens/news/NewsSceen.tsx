@@ -34,7 +34,7 @@ const newsData = [
   },
 ];
 
-export default function DetailSceen() {
+export default function NewsScreen() {
   return (
     <Box>
       <ScrollView>

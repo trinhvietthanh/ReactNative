@@ -9,67 +9,33 @@ import {
   Center,
   Heading,
   ScrollView,
+  FlatList,
 } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
 import BlockCard from "../../components/BlockCard";
+
+const dataSource = [
+  {
+    id: 1,
+    title: "Card 1",
+    desciption: "Desc",
+  },
+  {
+    id: 2,
+    title: "Card 2",
+    desciption: "Desc",
+  },
+  {
+    id: 3,
+    title: "Card 3",
+    desciption: "Desc",
+  },
+];
+
 export default function TransferSceen() {
   return (
     <Box>
-      <ScrollView>
-        <VStack>
-          <Stack direction="row" mb="2.5" mt="1.5" space={4}>
-            <Center
-              size="16"
-              bg="primary.400"
-              rounded="sm"
-              _text={{
-                color: "warmGray.50",
-                fontWeight: "medium",
-              }}
-              shadow={"3"}
-            >
-              ENG
-            </Center>
-            <Center
-              bg="primary.500"
-              size="16"
-              rounded="sm"
-              _text={{
-                color: "warmGray.50",
-                fontWeight: "medium",
-              }}
-              shadow={"3"}
-            >
-              SPAIN
-            </Center>
-            <Center
-              size="16"
-              bg="primary.700"
-              rounded="sm"
-              _text={{
-                color: "warmGray.50",
-                fontWeight: "medium",
-              }}
-              shadow={"3"}
-            >
-              ITALY
-            </Center>
-            <Center
-              size="16"
-              bg="primary.700"
-              rounded="sm"
-              _text={{
-                color: "warmGray.50",
-                fontWeight: "medium",
-              }}
-              shadow={"3"}
-            >
-              FRANCE
-            </Center>
-          </Stack>
-        </VStack>
-      </ScrollView>
       <VStack
         my="4"
         space={5}
@@ -102,22 +68,13 @@ export default function TransferSceen() {
         </VStack>
       </VStack>
 
-      <Center>
-        <ScrollView
-          maxW="400"
-          h="80"
-          _contentContainerStyle={{
-            px: "20px",
-            mb: "4",
-            minW: "72",
-            borderRadius: 8,
-          }}
-        >
-          <BlockCard/>
-          <BlockCard/>
-          <BlockCard/>
-        </ScrollView>
-      </Center>
+      <FlatList
+        data={dataSource}
+        renderItem={({ item }) => (
+          <BlockCard title={item.title} description={item.desciption} />
+        )}
+        keyExtractor={(item) => item.id}
+      ></FlatList>
     </Box>
   );
 }

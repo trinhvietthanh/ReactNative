@@ -1,31 +1,43 @@
 import React, { Component } from "react";
-import { VStack, Box, Divider } from 'native-base';
+import { VStack, Box, Divider, Center, Stack,Heading, Text, HStack } from 'native-base';
+import { StyleSheet } from 'react-native';
 
 export default function MatchCard() {
   return (
-    <Box bg={{
-      linearGradient: {
-        colors: ["lightBlue.300", "violet.800"],
-        start: [0, 0],
-        end: [1, 0]
-      }
-    }} p="12" rounded="xl" _text={{
-      fontSize: "md",
-      fontWeight: "medium",
-      color: "warmGray.50",
-      textAlign: "center"
+<Box alignItems="center">
+      <Box maxW="80" rounded="3xl" overflow="hidden" borderColor="coolGray.200" borderWidth="1" _dark={{
+      borderColor: "coolGray.600",
+      backgroundColor: "gray.700"
+    }} _web={{
+      shadow: 2,
+      borderWidth: 0
+    }} _light={{
+      backgroundColor: "gray.50"
     }}>
-      <VStack space="4" divider={<Divider />}>
-        
-        <Box px="4">
-          NativeBase is a free and open source framework that enable developers
-          to build high-quality mobile apps using React Native iOS and Android
-          apps with a fusion of ES6.
-        </Box>
-        <Box px="4" pb="4">
-          GeekyAnts
-        </Box>
-      </VStack>
+        <Stack p="4" space={3}>
+          
+          <Text fontWeight="400">
+            Bengaluru (also called Bangalore) is the center of India's high-tech
+            industry. The city is also known for its parks and nightlife.
+          </Text>
+          <HStack alignItems="center" space={4} justifyContent="space-between">
+            <HStack alignItems="center">
+              <Text color="coolGray.600" _dark={{
+              color: "warmGray.200"
+            }} fontWeight="400">
+                6 mins ago
+              </Text>
+            </HStack>
+          </HStack>
+        </Stack>
+      </Box>
     </Box>
   );
 }
+
+const styles =  StyleSheet.create({
+  container: {
+    padding: 10,
+    borderRadius: 20,
+  },
+})

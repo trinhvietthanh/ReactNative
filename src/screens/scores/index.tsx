@@ -1,4 +1,4 @@
-import { View, Text } from "react-native";
+import { View, Text, StyleSheet, TouchableHighlight } from "react-native";
 import {
   VStack,
   Box,
@@ -9,11 +9,84 @@ import {
   Center,
   Heading,
   ScrollView,
+  Image,
+  FlatList,
 } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 import MatchCard from "../../components/MatchCard";
-import React from "react";
-export default function ScoreScreen() {
+import React, { useEffect, useState } from "react";
+import { images } from "../../../assets/images";
+import Stacks from "../../../navigation/stack";
+
+const data = [
+  {
+    name: 'LiverPool',
+    image: 'LIV'
+  },
+  {
+    name: 'Mancheter City',
+    image: 'ARS'
+  },
+  {
+    name: 'Chelsea',
+    image: 'CHE'
+  },
+  {
+    name: 'Man city',
+    image: 'MNC'
+  },
+  {
+    name: 'Man Utd',
+    image: 'MAN'
+  },
+  {
+    name: 'Newcastle',
+    image: 'NEW'
+  },
+  {
+    name: 'Southampton',
+    image: 'SOU'
+  },
+
+  {
+    name: 'Tottenham',
+    image: 'TOT'
+  },
+  {
+    name: 'Leicester',
+    image: 'LEI'
+  },
+  {
+    name: 'Watford',
+    image: 'WAT'
+  },
+  {
+    name: 'Leicester',
+    image: 'WBA'
+  },
+  {
+    name: 'West Ham',
+    image: 'WHU'
+  },
+  
+]
+
+export default function ScoreScreen({ navigation }: any) {
+  const [teams, setTeam] = useState(data);
+  // useEffect(() => {
+  //   fetch("https://vast-beach-43552.herokuapp.com/teams")
+  //     .then((res) => {
+  //       return res.json();
+  //     })
+  //     .then((res) => {
+  //       setTeam(res.json());
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }, []);
+  // console.log(teams)
+
   return (
     <Box>
       <ScrollView>
@@ -47,6 +120,7 @@ export default function ScoreScreen() {
               size="16"
               bg="primary.700"
               rounded="sm"
+              // bgImage={'https://upload.wikimedia.org/wikipedia/en/b/ba/Flag_of_Germany.svg'}
               _text={{
                 color: "warmGray.50",
                 fontWeight: "medium",
@@ -101,7 +175,6 @@ export default function ScoreScreen() {
           />
         </VStack>
       </VStack>
-
       <Center>
         <ScrollView
           maxW="400"
@@ -113,11 +186,63 @@ export default function ScoreScreen() {
             borderRadius: 8,
           }}
         >
-          <MatchCard/>
-          <MatchCard/>
-          <MatchCard/>
+          <FlatList
+            data={teams}
+            numColumns={2}
+            renderItem={({ item }: any) => {
+              // let team = item.abbr;im
+              let team = item.image;
+              let logo = images[team]["uri"];
+              return (
+                <Box style={styles.container}>
+                  <TouchableHighlight
+                    onPress={() =>
+                      navigation.navigate("DetailScore", {
+                        team: item.abbr,
+                        teamName: item.name,
+                      })
+                    }
+                  >
+                    {/* <TouchableHighlight onPress={() => Stacks.navigate('Result')}> */}
+                    <Image style={styles.teamLogo} source={logo} alt="image" />
+                  </TouchableHighlight>
+                  <Text>{item.name}</Text>
+                </Box>
+              );
+            }}
+            keyExtractor={(item, index) => index}
+          />
         </ScrollView>
       </Center>
     </Box>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    margin: 5,
+    padding: 8,
+    alignItems: "center",
+    shadowOpacity: 0.75,
+    justifyContent: "center",
+    shadowRadius: 1,
+    shadowOffset: {width: 0, height: 0},  
+    // shadowColor: rgba(0, 0, 0, 0.8),
+
+  },
+  teamLogo: {
+    width: 35,
+    height: 35,
+  },
+  contentContainer: {
+    padding: 5,
+  },
+  bottomContainer: {
+    alignItems: "center",
+  },
+});
+function rgba(arg0: number, arg1: number, arg2: number, arg3: number): any | import("react-native").ColorValue | undefined {
+  throw new Error("Function not implemented.");
+}
+

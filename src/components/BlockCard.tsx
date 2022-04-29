@@ -4,7 +4,6 @@ import React from 'react'
 import { WebView } from 'react-native-webview';
 import { Box, Stack, Heading, Center, AspectRatio, HStack, Divider, Icon } from 'native-base';
 import { FontAwesome } from '@expo/vector-icons'; 
-import { flexbox } from 'native-base/lib/typescript/theme/styled-system';
 
 interface Props {
   title: string,
@@ -14,7 +13,6 @@ interface Props {
 }
 
 export default function BlockCard(props: Props) {
-  console.log(props)
   return (
     <Box alignItems="center" style={styles.container}>
     <Box maxW="80" rounded="lg" overflow="hidden" borderColor="coolGray.200" borderWidth="1" _dark={{
@@ -47,18 +45,11 @@ export default function BlockCard(props: Props) {
           <Heading size="md" ml="-1">
             {props.title}
           </Heading>
-          <Text fontSize="xs" _light={{
-          color: "violet.500"
-        }} _dark={{
-          color: "violet.400"
-        }} fontWeight="500" ml="-0.5" mt="-1">
+          <Text>
             {props.description}
           </Text>
         </Stack>
-        {/* <Text style={{fontSize: 12}}>
-          Bengaluru (also called Bangalore) is the center of India's high-tech
-          industry. The city is also known for its parks and nightlife.
-        </Text> */}
+       
         <Divider my={2} bg="#e0e0e0" />
         <HStack alignItems="center" space={2} justifyContent="space-between">
           <HStack  style={styles.bottomContainer}>
