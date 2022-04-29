@@ -18,18 +18,21 @@ import BlockCard from "../../components/BlockCard";
 const dataSource = [
   {
     id: 1,
-    title: "Card 1",
-    desciption: "Desc",
+    title: "Chi tiết hợp đồng của Rudiger với Real Madrid: Lương, lót tay, hoa hồng",
+    desciption: "Real Madrid được xác nhận đã giành được chữ ký của trung vệ Antonio Rudiger từ Chelsea theo dạng chuyển nhượng tự do.",
+    image: "https://media.bongda.com.vn/files/trong.le/2022/04/29/screenshot-2022-04-29-144217-1442.jpg"
   },
   {
     id: 2,
-    title: "Card 2",
-    desciption: "Desc",
+    title: "Dọn đường đón Pogba, Real Madrid lên kế hoạch bán công thần",
+    desciption: "Đội bóng Hoàng gia Tây Ban Nha sẵn sàng bán một trụ cột để dọn đường đón Paul Pogba vào Hè tới.",
+    image: "https://media.bongda.com.vn/files/duong.nguyen/2022/04/29/1-1051.jpg"
   },
   {
     id: 3,
-    title: "Card 3",
-    desciption: "Desc",
+    title: "Vì sao Chelsea và Man Utd theo sát Declan Rice?",
+    desciption: " Ngôi sao West Ham đã trở thành mục tiêu thu hút sự chú ý của những đội bóng hàng đầu giải Ngoại hạng Anh.",
+    image: "https://media.bongda.com.vn/files/hai.phan/2022/04/15/c9b3239d-e08a-4194-ad79-be87afb6fdc9-0851.jpg"
   },
 ];
 
@@ -71,7 +74,7 @@ export default function TransferSceen() {
       <FlatList
         data={dataSource}
         renderItem={({ item }) => (
-          <BlockCard title={item.title} description={item.desciption} />
+          <BlockCard title={item.title} description={item.desciption} image={item.image}/>
         )}
         keyExtractor={(item) => item.id}
       ></FlatList>
