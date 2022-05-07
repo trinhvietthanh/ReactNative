@@ -16,7 +16,8 @@ import { Ionicons } from "@expo/vector-icons";
 import MatchCard from "../../components/MatchCard";
 import React, { useEffect, useState } from "react";
 import { images } from "../../../assets/images";
-import Stacks from "../../../navigation/stack";
+import { getLeaguges } from "../../../api/services"; 
+import { LenguagesListItem } from "../../../api/data";
 
 const data = [
   {
@@ -73,20 +74,18 @@ const data = [
 
 export default function ScoreScreen({ navigation }: any) {
   const [teams, setTeam] = useState(data);
-  // useEffect(() => {
-  //   fetch("https://vast-beach-43552.herokuapp.com/teams")
-  //     .then((res) => {
-  //       return res.json();
-  //     })
-  //     .then((res) => {
-  //       setTeam(res.json());
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, []);
-  // console.log(teams)
+  const [lengues, setLenguges] = useState<LenguagesListItem[]>([]);
+  const [country, setCountry] = useState('England');
+  useEffect(() => {
+    getLeaguges(country).then(
+      data => {
+        setLenguges(data);
+      }
+    ).catch(error => {
+      alert(error);
+    });
 
+  }, [country])
   return (
     <Box>
       <ScrollView>
@@ -148,7 +147,6 @@ export default function ScoreScreen({ navigation }: any) {
         my="4"
         space={5}
         w="100%"
-        maxW="300px"
         divider={
           <Box px="2">
             <Divider />
@@ -177,7 +175,6 @@ export default function ScoreScreen({ navigation }: any) {
       </VStack>
       <Center>
         <ScrollView
-          maxW="400"
           h="80"
           _contentContainerStyle={{
             px: "20px",
@@ -187,12 +184,11 @@ export default function ScoreScreen({ navigation }: any) {
           }}
         >
           <FlatList
-            data={teams}
+            data={lengues}
             numColumns={2}
             renderItem={({ item }: any) => {
               // let team = item.abbr;im
-              let team = item.image;
-              let logo = images[team]["uri"];
+              console.log(item.team);
               return (
                 <Box style={styles.container}>
                   <TouchableHighlight
@@ -204,9 +200,9 @@ export default function ScoreScreen({ navigation }: any) {
                     }
                   >
                     {/* <TouchableHighlight onPress={() => Stacks.navigate('Result')}> */}
-                    <Image style={styles.teamLogo} source={logo} alt="image" />
+                    {/* <Image style={styles.teamLogo} source={item.lengue.logo} alt="image" /> */}
                   </TouchableHighlight>
-                  <Text>{item.name}</Text>
+                  {/* <Text>{item.lengue.name}</Text> */}
                 </Box>
               );
             }}

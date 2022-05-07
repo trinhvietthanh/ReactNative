@@ -1,6 +1,11 @@
 import { Box, Text, Image } from "native-base";
+import { useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
-export default function DetailNewsScreen() {
+export default function DetailTransfer(props: any) {
+  const [news, setNews] = useState();
+  useEffect(() => {
+
+  }, [])
   return (
     <Box style={styles.newsContainer}>
       <Image
@@ -8,13 +13,14 @@ export default function DetailNewsScreen() {
         height={250}
         resizeMode={"cover"}
         source={{
-          uri: "https://media.bongda.com.vn/files/trong.le/2022/04/29/screenshot-2022-04-29-144217-1442.jpg",
+          uri: props.image,
         }}
         alt="Alternate Text"
       />
-      <Text style={styles.title}>This is title</Text>
-      <Text style={styles.date}>12/10/2021</Text>
-      <Text style={styles.newsDescription}>Something</Text>
+      <Text style={styles.title}>{props.title}</Text>
+      <Text style={styles.date}>{props.date}</Text>
+      <Text style={styles.newsDescription}>{props.description}</Text>
+      <Text style={styles.newsDescription}>{props.content}</Text>
     </Box>
   );
 }

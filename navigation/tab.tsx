@@ -3,7 +3,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { MaterialIcons, Ionicons, Entypo } from "@expo/vector-icons";
 
 import Header from "../shared/header";
-import DetailSceen from "../src/screens/news/DetailSceen";
+import DetailNewsSceen from "../src/screens/news/DetailSceen";
 import DetailScore from "../src/screens/scores/detailScoreScreen";
 import TransferSceen from "../src/screens/transfer";
 import ScoreScreen from "../src/screens/scores";
@@ -12,6 +12,7 @@ import SignUpScreen from "../src/screens/account/SignUpScreen";
 import UCLSceen from "../src/screens/UCL";
 import NewsScreen from "../src/screens/news/NewsSceen";
 import { Image, StyleSheet } from "react-native";
+import DetailTransfer from "../src/screens/transfer/detailTransfer";
 
 const styles = StyleSheet.create({
   container: {
@@ -33,7 +34,10 @@ const TransferScreenNavigator = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Transfer" component={TransferSceen} />
-      <Stack.Screen name="DetailScreen" component={DetailSceen} />
+      <Stack.Screen
+        name="DetailScreen"
+        component={DetailTransfer}
+      />
     </Stack.Navigator>
   );
 };
@@ -51,7 +55,16 @@ const NewsScreenNavigator = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen name="NewsScreen" component={NewsScreen}/>
-      <Stack.Screen name="DetailScore" component={DetailSceen} />
+      <Stack.Screen name="DetailScore" component={ DetailNewsSceen } />
+    </Stack.Navigator>
+  )
+}
+
+const LoginScreenNavigator = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="SignIn" component={SignInScreen}/>
+      <Stack.Screen name="SignUp" component={SignUpScreen}/>
     </Stack.Navigator>
   )
 }
@@ -120,7 +133,7 @@ const Tabs = () => {
       />
       <Tab.Screen
         name="Profile"
-        component={SignUpScreen}
+        component={LoginScreenNavigator}
         options={{
           headerShown: false,
           tabBarLabel: "Profile",

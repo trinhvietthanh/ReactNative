@@ -31,3 +31,21 @@ export type TeamListItems = {
   team: Team;
   venue: Venue;
 }
+
+export type Lenguage = {
+  id: number;
+  type: string;
+  name: string;
+  logo: URL;
+}
+
+export type Country = {
+  name: string;
+  code: string;
+  flag: string;
+}
+
+export type LenguagesListItem = {
+  lenguage: Lenguage;
+  country: Country;
+}

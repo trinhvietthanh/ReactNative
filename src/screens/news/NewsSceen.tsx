@@ -98,7 +98,7 @@ export default function NewsScreen() {
         my="4"
         space={5}
         w="100%"
-        maxW="300px"
+        maxW="500px"
         divider={
           <Box px="2">
             <Divider />
