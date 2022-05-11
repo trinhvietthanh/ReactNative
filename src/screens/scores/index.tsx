@@ -1,4 +1,10 @@
-import { View, Text, StyleSheet, TouchableHighlight } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableHighlight,
+  LogBox,
+} from "react-native";
 import {
   VStack,
   Box,
@@ -11,138 +17,67 @@ import {
   ScrollView,
   Image,
   FlatList,
+  Button,
 } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
-import MatchCard from "../../components/MatchCard";
 import React, { useEffect, useState } from "react";
 import { images } from "../../../assets/images";
-import { getLeaguges } from "../../../api/services"; 
-import { LenguagesListItem } from "../../../api/data";
-
-const data = [
-  {
-    name: 'LiverPool',
-    image: 'LIV'
-  },
-  {
-    name: 'Mancheter City',
-    image: 'ARS'
-  },
-  {
-    name: 'Chelsea',
-    image: 'CHE'
-  },
-  {
-    name: 'Man city',
-    image: 'MNC'
-  },
-  {
-    name: 'Man Utd',
-    image: 'MAN'
-  },
-  {
-    name: 'Newcastle',
-    image: 'NEW'
-  },
-  {
-    name: 'Southampton',
-    image: 'SOU'
-  },
-
-  {
-    name: 'Tottenham',
-    image: 'TOT'
-  },
-  {
-    name: 'Leicester',
-    image: 'LEI'
-  },
-  {
-    name: 'Watford',
-    image: 'WAT'
-  },
-  {
-    name: 'Leicester',
-    image: 'WBA'
-  },
-  {
-    name: 'West Ham',
-    image: 'WHU'
-  },
-  
-]
+import { getLeaguges } from "../../../api/services";
+import { TeamListItems } from "../../../api/data";
 
 export default function ScoreScreen({ navigation }: any) {
-  const [teams, setTeam] = useState(data);
-  const [lengues, setLenguges] = useState<LenguagesListItem[]>([]);
-  const [country, setCountry] = useState('England');
+  const [teams, setTeams] = useState<TeamListItems>();
+  const [country, setCountry] = useState("England");
   useEffect(() => {
-    getLeaguges(country).then(
-      data => {
-        setLenguges(data);
-      }
-    ).catch(error => {
-      alert(error);
-    });
-
-  }, [country])
+    getLeaguges(country)
+      .then((data) => {
+        setTeams(data);
+      })
+      .catch((error) => {
+        alert(error);
+      });
+  }, []);
+  useEffect(() => {
+    getLeaguges(country)
+      .then((data) => {
+        setTeams(data);
+      })
+      .catch((error) => {
+        alert(error);
+      });
+  }, [country]);
   return (
     <Box>
-      <ScrollView>
-        <VStack>
+      <VStack>
+        <ScrollView>
           <Stack direction="row" mb="2.5" mt="1.5" space={4}>
-            <Center
-              size="16"
-              bg="primary.400"
-              rounded="sm"
-              _text={{
-                color: "warmGray.50",
-                fontWeight: "medium",
-              }}
-              shadow={"3"}
-            >
-              ENG
-            </Center>
-            <Center
-              bg="primary.500"
-              size="16"
-              rounded="sm"
-              _text={{
-                color: "warmGray.50",
-                fontWeight: "medium",
-              }}
-              shadow={"3"}
-            >
-              SPAIN
-            </Center>
-            <Center
-              size="16"
-              bg="primary.700"
-              rounded="sm"
-              // bgImage={'https://upload.wikimedia.org/wikipedia/en/b/ba/Flag_of_Germany.svg'}
-              _text={{
-                color: "warmGray.50",
-                fontWeight: "medium",
-              }}
-              shadow={"3"}
-            >
-              ITALY
-            </Center>
-            <Center
-              size="16"
-              bg="primary.700"
-              rounded="sm"
-              _text={{
-                color: "warmGray.50",
-                fontWeight: "medium",
-              }}
-              shadow={"3"}
-            >
-              FRANCE
-            </Center>
+            <Button onPress={() => setCountry("England")}>
+              <Image
+                style={styles.countryImage}
+                source={require("../../../assets/premier.jpeg")}
+              ></Image>
+            </Button>
+            <Button onPress={() => setCountry("France")}>
+              <Image
+                style={styles.countryImage}
+                source={require("../../../assets/fr.png")}
+              ></Image>
+            </Button>
+            <Button onPress={() => setCountry("Italy")}>
+              <Image
+                style={styles.countryImage}
+                source={require("../../../assets/seriea.jpeg")}
+              ></Image>
+            </Button>
+            <Button onPress={() => setCountry("Germany")}>
+              <Image
+                style={styles.countryImage}
+                source={require("../../../assets/ge.png")}
+              ></Image>
+            </Button>
           </Stack>
-        </VStack>
-      </ScrollView>
+        </ScrollView>
+      </VStack>
       <VStack
         my="4"
         space={5}
@@ -153,29 +88,9 @@ export default function ScoreScreen({ navigation }: any) {
           </Box>
         }
       >
-        <VStack w="100%" space={5} alignSelf="center">
-          <Input
-            placeholder="Search"
-            variant="filled"
-            width="100%"
-            borderRadius="10"
-            py="1"
-            px="2"
-            borderWidth="0"
-            InputLeftElement={
-              <Icon
-                ml="2"
-                size="4"
-                color="gray.400"
-                as={<Ionicons name="ios-search" />}
-              />
-            }
-          />
-        </VStack>
       </VStack>
-      <Center>
         <ScrollView
-          h="80"
+          minW={120}
           _contentContainerStyle={{
             px: "20px",
             mb: "4",
@@ -184,32 +99,31 @@ export default function ScoreScreen({ navigation }: any) {
           }}
         >
           <FlatList
-            data={lengues}
+            data={teams}
             numColumns={2}
             renderItem={({ item }: any) => {
-              // let team = item.abbr;im
-              console.log(item.team);
+              let image = item?.team?.logo;
               return (
                 <Box style={styles.container}>
                   <TouchableHighlight
-                    onPress={() =>
-                      navigation.navigate("DetailScore", {
-                        team: item.abbr,
-                        teamName: item.name,
-                      })
-                    }
+                    onPress={() => navigation.navigate("DetailScore", {
+                      team: item.team.id,
+                      league: country,
+                    })}
                   >
-                    {/* <TouchableHighlight onPress={() => Stacks.navigate('Result')}> */}
-                    {/* <Image style={styles.teamLogo} source={item.lengue.logo} alt="image" /> */}
+                    <Image
+                      style={styles.teamLogo}
+                      source={{ uri: image }}
+                      alt="image"
+                    />
                   </TouchableHighlight>
-                  {/* <Text>{item.lengue.name}</Text> */}
+                  <Text>{item?.team?.name}</Text>
                 </Box>
               );
             }}
             keyExtractor={(item, index) => index}
           />
         </ScrollView>
-      </Center>
     </Box>
   );
 }
@@ -223,13 +137,17 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.75,
     justifyContent: "center",
     shadowRadius: 1,
-    shadowOffset: {width: 0, height: 0},  
+    shadowOffset: { width: 0, height: 0 },
     // shadowColor: rgba(0, 0, 0, 0.8),
-
   },
   teamLogo: {
     width: 35,
     height: 35,
+  },
+  countryImage: {
+    width: 60,
+    height: 60,
+    borderRadius: 10,
   },
   contentContainer: {
     padding: 5,
@@ -238,7 +156,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 });
-function rgba(arg0: number, arg1: number, arg2: number, arg3: number): any | import("react-native").ColorValue | undefined {
+function rgba(
+  arg0: number,
+  arg1: number,
+  arg2: number,
+  arg3: number
+): any | import("react-native").ColorValue | undefined {
   throw new Error("Function not implemented.");
 }
-

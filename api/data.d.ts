@@ -46,6 +46,14 @@ export type Country = {
 }
 
 export type LenguagesListItem = {
-  lenguage: Lenguage;
+  team: Lenguage;
   country: Country;
+}
+
+export type Team = {
+  name: string;
+  country: string;
+  code: string;
+  id: number;
+  logo: URL;
 }

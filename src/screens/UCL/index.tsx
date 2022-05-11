@@ -260,20 +260,11 @@ export default function UCLSceen() {
                   }}
                 />
                 <VStack>
-                  <Text
-                    _dark={{
-                      color: "warmGray.50",
-                    }}
-                    color="coolGray.800"
-                    bold
-                  >
+                  <Text>
                     {item.fullName}
                   </Text>
                   <Text
-                    color="coolGray.600"
-                    _dark={{
-                      color: "warmGray.200",
-                    }}
+                   
                   >
                     {item.recentText.map((value) => {
                       if (value == 1) {

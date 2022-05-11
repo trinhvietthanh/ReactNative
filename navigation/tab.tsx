@@ -45,8 +45,8 @@ const TransferScreenNavigator = () => {
 const ScoreScreenNavigator = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Score" component={ScoreScreen} />
       <Stack.Screen name="DetailScore" component={DetailScore} />
+      <Stack.Screen name="League" component={ScoreScreen} />
     </Stack.Navigator>
   );
 };
@@ -55,7 +55,7 @@ const NewsScreenNavigator = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen name="NewsScreen" component={NewsScreen}/>
-      <Stack.Screen name="DetailScore" component={ DetailNewsSceen } />
+      <Stack.Screen name="DetailNews" component={ DetailNewsSceen } />
     </Stack.Navigator>
   )
 }
