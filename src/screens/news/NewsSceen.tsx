@@ -18,7 +18,7 @@ import BlockCard from "../../components/BlockCard";
 
 const newsData = [
   {
-    id: 1,
+    id: '1',
     title:
       "Chuyển nhượng 29/04: Ten Hag được M.U 'thưởng', xác định HĐ chất lượng; Abramovich đòi quyền lợi bán Chelsea",
     desciption: "Desc",
@@ -26,7 +26,7 @@ const newsData = [
       "https://media.bongda.com.vn/resize/240x145/files/news/2022/04/29/dsd-122838.jpg",
   },
   {
-    id: 2,
+    id: '2',
     title: `3 điều rút ra sau buổi tập gần nhất của Arsenal: Nụ cười của "chiến thần"`,
     desciption:
       "Arsenal đang có những sự chuẩn bị rất nghiêm túc cho trận đấu derby cuối tuần này gặp West Ham.",
@@ -34,7 +34,7 @@ const newsData = [
       "https://media.bongda.com.vn/resize/240x145/files/phi.do/2022/04/29/1-1912.jpeg",
   },
   {
-    id: 3,
+    id: '3',
     title: `Arsenal dựng "bức tường Saka" ở Emirates`,
     desciption:
       "Arsenal đã có một hành động hết sức nhân văn để tôn vinh những cống hiến của Bukayo Saka trong thời gian qua.",
@@ -42,7 +42,7 @@ const newsData = [
   },
 ];
 
-export default function NewsScreen() {
+export default function NewsScreen({ navigation }) {
   return (
     <Box>
       <VStack w="100%" space={5} alignSelf="center">
@@ -69,8 +69,11 @@ export default function NewsScreen() {
         data={newsData}
         renderItem={({ item }) => (
           <BlockCard
+            navigation={navigation}
+            key={item.id}
             title={item.title}
             description={item.desciption}
+            idItem={item.id}
             image={item.image}
           />
         )}

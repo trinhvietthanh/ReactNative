@@ -33,7 +33,7 @@ const Stack = createStackNavigator();
 const TransferScreenNavigator = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Transfer" component={TransferSceen} />
+      <Stack.Screen name="Transfer News" component={TransferSceen} />
       <Stack.Screen
         name="DetailScreen"
         component={DetailTransfer}
@@ -45,8 +45,8 @@ const TransferScreenNavigator = () => {
 const ScoreScreenNavigator = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="DetailScore" component={DetailScore} />
       <Stack.Screen name="League" component={ScoreScreen} />
+      <Stack.Screen name="DetailScore" component={DetailScore} />
     </Stack.Navigator>
   );
 };
@@ -55,7 +55,7 @@ const NewsScreenNavigator = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen name="NewsScreen" component={NewsScreen}/>
-      <Stack.Screen name="DetailNews" component={ DetailNewsSceen } />
+      <Stack.Screen name="DetailScreen" component={ DetailNewsSceen } />
     </Stack.Navigator>
   )
 }
@@ -64,7 +64,7 @@ const LoginScreenNavigator = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen name="SignIn" component={SignInScreen}/>
-      <Stack.Screen name="SignUp" component={SignUpScreen}/>
+      <Stack.Screen name="RegisterScreen" component={SignUpScreen}/>
     </Stack.Navigator>
   )
 }
@@ -106,7 +106,6 @@ const Tabs = () => {
       <Tab.Screen
         name="UCL"
         options={{
-          headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <Image
               source={require("../assets/icons/UCL.png")}

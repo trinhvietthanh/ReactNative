@@ -137,15 +137,15 @@ const dataSource = [
   },
 ];
 export default function DetailScore({ route, navigation }: any) {
-  // const { team, league } = route.params;
+  const { team, league } = route.params;
   const [data, setData] = useState();
-  // useEffect(() => {
-  //   getScore(team, 39).then(data => {
-  //     setData(data);
-  //   }).catch((error) => {
-  //     console.log(error);
-  //   });
-  // }, []);
+  useEffect(() => {
+    getScore(team, 39).then(data => {
+      setData(data);
+    }).catch((error) => {
+      console.log(error);
+    });
+  }, []);
 
   return (
     <ScrollView
@@ -158,10 +158,10 @@ export default function DetailScore({ route, navigation }: any) {
       }}
     >
       <FlatList
-        data={dataSource}
+        data={data}
         renderItem={({ item }: any) => {
           return (
-            <HStack space={3} alignItems="center" justifyContent="center">
+            <HStack space={3} key={item.id} alignItems="center" justifyContent="center">
               <View
                 style={{
                   display: "flex",

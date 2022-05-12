@@ -1,7 +1,8 @@
-import { View, Text } from "react-native";
+import { View, StyleSheet } from "react-native";
 import {
   VStack,
   Box,
+  Text,
   Input,
   Divider,
   Icon,
@@ -12,294 +13,281 @@ import {
   Heading,
   ScrollView,
   HStack,
+  Image,
+  Button,
+  Center,
 } from "native-base";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import BlockCard from "../../components/BlockCard";
+import {  getMatchOfRound } from "../../../api/services";
 export default function UCLSceen() {
-  const data = [
-    {
-      id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-      fullName: "Mancity",
-      timeStamp: "Đ: 12",
-      recentText: [0, 1, 1, 1, 0],
-      avatarUrl:
-        "https://ssl.gstatic.com/onebox/media/sports/logos/z44l-a0W1v5FmgPnemV6Xw_48x48.png",
-    },
-    {
-      id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
-      fullName: "PSG",
-      timeStamp: "Đ: 11", 
-      recentText: [1, 0, 2, 1, 1],
-      avatarUrl:
-        "https://ssl.gstatic.com/onebox/media/sports/logos/mcpMspef1hwHwi9qrfp4YQ_48x48.png",
-    },
-    {
-      id: "58694a0f-3da1-471f-bd96-145571e29d72",
-      fullName: "Leipzig",
-      timeStamp: "Đ: 7",
-      recentText: [1, 1, 2, 0, 0],
-      avatarUrl:
-        "https://ssl.gstatic.com/onebox/media/sports/logos/R7-Lqc_SDxd97uWgoeUQ-g_48x48.png",
-    },
-    {
-      id: "68694a0f-3da1-431f-bd56-142371e29d72",
-      fullName: "Club Bruge",
-      timeStamp: "Đ: 4",
-      recentText: [0,0,0,0,1],
-      avatarUrl:
-        "https://ssl.gstatic.com/onebox/media/sports/logos/5FQBXpID1LAQJb0BOnmTpw_48x48.png",
-    },
-  ];
-  const dataB = [
-    {
-      id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-      fullName: "LiverPool",
-      timeStamp: "Đ: 15",
-      recentText: [1, 1, 1, 1, 1],
-      avatarUrl:
-        "https://ssl.gstatic.com/onebox/media/sports/logos/0iShHhASp5q1SL4JhtwJiw_48x48.png",
-    },
-    {
-      id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
-      fullName: "Atlético Madrid",
-      timeStamp: "Đ: 7", 
-      recentText: [0, 0, 2, 1, 0],
-      avatarUrl:
-        "https://ssl.gstatic.com/onebox/media/sports/logos/srAAE0bOnCppUrlbJpFiHQ_48x48.png",
-    },
-    {
-      id: "58694a0f-3da1-471f-bd96-145571e29d72",
-      fullName: "Porto",
-      timeStamp: "Đ: 5",
-      recentText: [1, 1, 2, 0, 0],
-      avatarUrl:
-        "https://ssl.gstatic.com/onebox/media/sports/logos/QkkllEKwkj60jEVtOEZWAg_48x48.png",
-    },
-    {
-      id: "68694a0f-3da1-431f-bd56-142371e29d72",
-      fullName: "Milan",
-      timeStamp: "Đ: 4",
-      recentText: [0,1,2,0,0],
-      avatarUrl:
-        "https://ssl.gstatic.com/onebox/media/sports/logos/VoKsJ6RitaHGhsM62e6AXQ_48x48.png",
-    },
-  ];
+  const [round, setRound] = useState("Group Stage - 1");
+  const [match, setMatch] = useState();
+  useEffect(() => {
+    getMatchOfRound(round)
+      .then((data) => {
+        setMatch(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+  useEffect(() => {
+    getMatchOfRound(round)
+      .then((data) => {
+        setMatch(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [round]);
   return (
-    <ScrollView>
-      <Box>
-        <Heading fontSize="xl" p="4" pb="3">
-          Bảng A
-        </Heading>
-        <FlatList
-          data={data}
-          renderItem={({ item }) => (
-            <Box
-              borderBottomWidth="1"
-              _dark={{
-                borderColor: "gray.600",
+    <Box>
+      <ScrollView horizontal={true}>
+      <Button margin={2} onPress={()=> setRound('Group Stage - 1')}>
+              <Center
+              size="16"
+              bg="primary.400"
+              rounded="sm"
+              _text={{
+                color: "warmGray.50",
+                fontWeight: "medium",
               }}
-              borderColor="coolGray.200"
-              pl="4"
-              pr="5"
-              py="2"
+              shadow={"3"}
             >
-              <HStack space={3} justifyContent="space-between">
-                <Avatar
-                  size="48px"
-                  source={{
-                    uri: item.avatarUrl,
-                  }}
-                />
-                <VStack>
-                  <Text
-                    _dark={{
-                      color: "warmGray.50",
-                    }}
-                    color="coolGray.800"
-                    bold
-                  >
-                    {item.fullName}
-                  </Text>
-                  <Text
-                    color="coolGray.600"
-                    _dark={{
-                      color: "warmGray.200",
-                    }}
-                  >
-                    {item.recentText.map((value) => {
-                      if (value == 1) {
-                        return (
-                          <AntDesign
-                            name="checkcircle"
-                            size={15}
-                            color="green"
-                          />
-                        );
-                      } 
-                      if (value == 0){
-                        return <AntDesign name="closecircle" size={15} color="red" />;
-                      }
-                      return <AntDesign name="minuscircle" size={15} color="gray" />
-                    })}
-                  </Text>
-                </VStack>
-                <Spacer />
-                <Text
-                  fontSize="xs"
-                  _dark={{
-                    color: "warmGray.50",
-                  }}
-                  color="coolGray.800"
-                  alignSelf="flex-start"
-                >
-                  {item.timeStamp}
-                </Text>
-              </HStack>
-            </Box>
-          )}
-          keyExtractor={(item) => item.id}
-        />
-      </Box>
-      <Box>
-        <Heading fontSize="xl" p="4" pb="3">
-          Bảng B
-        </Heading>
-        <FlatList
-          data={dataB}
-          renderItem={({ item }) => (
-            <Box
-              borderBottomWidth="1"
-              _dark={{
-                borderColor: "gray.600",
+              Round 1
+            </Center>
+            </Button>
+            <Button margin={2} onPress={()=> setRound('Group Stage - 2')}>
+              <Center
+              size="16"
+              bg="primary.400"
+              rounded="sm"
+              _text={{
+                color: "warmGray.50",
+                fontWeight: "medium",
               }}
-              borderColor="coolGray.200"
-              pl="4"
-              pr="5"
-              py="2"
+              shadow={"3"}
             >
-              <HStack space={3} justifyContent="space-between">
-                <Avatar
-                  size="48px"
-                  source={{
-                    uri: item.avatarUrl,
-                  }}
-                />
-                <VStack>
-                  <Text
-                    _dark={{
-                      color: "warmGray.50",
-                    }}
-                    color="coolGray.800"
-                    bold
-                  >
-                    {item.fullName}
-                  </Text>
-                  <Text
-                    color="coolGray.600"
-                    _dark={{
-                      color: "warmGray.200",
-                    }}
-                  >
-                    {item.recentText.map((value) => {
-                      if (value == 1) {
-                        return (
-                          <AntDesign
-                            name="checkcircle"
-                            size={15}
-                            color="green"
-                          />
-                        );
-                      } 
-                      if (value == 0){
-                        return <AntDesign name="closecircle" size={15} color="red" />;
-                      }
-                      return <AntDesign name="minuscircle" size={15} color="gray" />
-                    })}
-                  </Text>
-                </VStack>
-                <Spacer />
-                <Text
-                  fontSize="xs"
-                  _dark={{
-                    color: "warmGray.50",
-                  }}
-                  color="coolGray.800"
-                  alignSelf="flex-start"
-                >
-                  {item.timeStamp}
-                </Text>
-              </HStack>
-            </Box>
-          )}
-          keyExtractor={(item) => item.id}
-        />
-      </Box>
-      <Box>
-        <Heading fontSize="xl" p="4" pb="3">
-          Bảng C
-        </Heading>
-        <FlatList
-          data={dataB}
-          renderItem={({ item }) => (
-            <Box
-              borderBottomWidth="1"
-              _dark={{
-                borderColor: "gray.600",
+              Round 2
+            </Center>
+            </Button>
+            <Button margin={2} onPress={()=> setRound('Group Stage - 3')}>
+              <Center
+              size="16"
+              bg="primary.400"
+              rounded="sm"
+              _text={{
+                color: "warmGray.50",
+                fontWeight: "medium",
               }}
-              borderColor="coolGray.200"
-              pl="4"
-              pr="5"
-              py="2"
+              shadow={"3"}
             >
-              <HStack space={3} justifyContent="space-between">
-                <Avatar
-                  size="48px"
-                  source={{
-                    uri: item.avatarUrl,
-                  }}
-                />
-                <VStack>
-                  <Text>
-                    {item.fullName}
-                  </Text>
-                  <Text
-                   
-                  >
-                    {item.recentText.map((value) => {
-                      if (value == 1) {
-                        return (
-                          <AntDesign
-                            name="checkcircle"
-                            size={15}
-                            color="green"
-                          />
-                        );
-                      } 
-                      if (value == 0){
-                        return <AntDesign name="closecircle" size={15} color="red" />;
-                      }
-                      return <AntDesign name="minuscircle" size={15} color="gray" />
-                    })}
-                  </Text>
-                </VStack>
-                <Spacer />
-                <Text
-                  fontSize="xs"
-                  _dark={{
-                    color: "warmGray.50",
-                  }}
-                  color="coolGray.800"
-                  alignSelf="flex-start"
+              Round 3
+            </Center>
+            </Button>
+            <Button margin={2} onPress={()=> setRound('Group Stage - 4')}>
+              <Center
+              size="16"
+              bg="primary.400"
+              rounded="sm"
+              _text={{
+                color: "warmGray.50",
+                fontWeight: "medium",
+              }}
+              shadow={"3"}
+            >
+              Round 4
+            </Center>
+            </Button>
+            <Button margin={2} onPress={()=> setRound('Group Stage - 5')}>
+              <Center
+              size="16"
+              bg="primary.400"
+              rounded="sm"
+              _text={{
+                color: "warmGray.50",
+                fontWeight: "medium",
+              }}
+              shadow={"3"}
+            >
+              Round 5
+                          </Center>
+            </Button>
+
+         
+            <Button margin={2} onPress={()=> setRound('Group Stage - 6')}>
+              <Center
+              size="16"
+              bg="primary.400"
+              rounded="sm"
+              _text={{
+                color: "warmGray.50",
+                fontWeight: "medium",
+              }}
+              shadow={"3"}
+            >
+              Round 6
+            </Center>
+            </Button>
+            <Button margin={2} onPress={()=> setRound('Round of 16')}>
+              <Center
+              size="16"
+              bg="primary.400"
+              rounded="sm"
+              _text={{
+                color: "warmGray.50",
+                fontWeight: "medium",
+              }}
+              shadow={"3"}
+            >
+                            Vòng 1-16
+            </Center>
+            </Button>
+            
+            <Button margin={2} onPress={()=> setRound('Quarter-finals')}>
+              <Center
+              size="16"
+              bg="primary.400"
+              rounded="sm"
+              _text={{
+                color: "warmGray.50",
+                fontWeight: "medium",
+              }}
+              shadow={"3"}
+            >
+                            Tứ kết
+            </Center>
+            </Button>
+            <Button margin={2} onPress={()=> setRound('Semi-finals')}>
+              <Center
+              size="16"
+              bg="primary.400"
+              rounded="sm"
+              _text={{
+                color: "warmGray.50",
+                fontWeight: "medium",
+              }}
+              shadow={"3"}
+            >
+                            Bán kết
+            </Center>
+            </Button>
+            <Button margin={2} onPress={()=> setRound('Final')}>
+              <Center
+              size="16"
+              bg="primary.400"
+              rounded="sm"
+              _text={{
+                color: "warmGray.50",
+                fontWeight: "medium",
+              }}
+              shadow={"3"}
+            >
+              Final
+            </Center>
+              </Button>
+           
+      </ScrollView>
+
+      <ScrollView
+      minW={120}
+      _contentContainerStyle={{
+        px: "20px",
+        mb: "4",
+        minW: "72",
+        borderRadius: 8,
+      }}
+    >
+      <Text>{round}</Text>
+      <FlatList
+        data={match}
+        renderItem={({ item }: any) => {
+          return (
+            <HStack space={3} alignItems="center" justifyContent="center">
+              <View
+                style={{
+                  display: "flex",
+                }}
+              >
+                <HStack
+                  m="3"
+                  w="300"
+                  borderRadius="xl"
+                  p="3"
+                  bg="cyan.200"
+                  alignItems="center"
+                  justifyContent="center"
                 >
-                  {item.timeStamp}
-                </Text>
-              </HStack>
-            </Box>
-          )}
-          keyExtractor={(item) => item.id}
-        />
-      </Box>
+                  <VStack alignItems="center" justifyContent="center">
+                    <Image
+                      width={50}
+                      height={50}
+                      marginRight={10}
+                      resizeMode={"cover"}
+                      source={{
+                        uri: item.teams.away.logo,
+                      }}
+                      alt="Alternate Text"
+                    />
+                    <Text marginRight={10}>MU</Text>
+                  </VStack>
+
+                 {item?.goals.away ?  <Text>
+                    {item?.goals.away} - {item?.goals.home}
+                  </Text> : <Text>28/05/2022</Text>}
+                
+                  <VStack alignItems="center" justifyContent="center">
+                    <Image
+                      width={50}
+                      height={50}
+                      marginLeft={10}
+                      resizeMode={"cover"}
+                      source={{
+                        uri: item.teams.home.logo,
+                      }}
+                      alt="Alternate Text"
+                    />
+                    <Text marginLeft={10}>MU</Text>
+                  </VStack>
+                </HStack>
+              </View>
+            </HStack>
+          );
+        }}
+        keyExtractor={(item, index) => index}
+      />
     </ScrollView>
+    </Box>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    margin: 5,
+    padding: 8,
+    alignItems: "center",
+    shadowOpacity: 0.75,
+    justifyContent: "center",
+    shadowRadius: 1,
+    shadowOffset: { width: 0, height: 0 },
+    // shadowColor: rgba(0, 0, 0, 0.8),
+  },
+  teamLogo: {
+    width: 35,
+    height: 35,
+  },
+  countryImage: {
+    width: 60,
+    height: 60,
+    borderRadius: 10,
+  },
+  contentContainer: {
+    padding: 5,
+  },
+  bottomContainer: {
+    alignItems: "center",
+  },
+});

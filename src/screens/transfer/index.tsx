@@ -26,7 +26,7 @@ const dataSource = [
       "https://media.bongda.com.vn/files/trong.le/2022/04/29/screenshot-2022-04-29-144217-1442.jpg",
   },
   {
-    id: '123123',
+    id: '1231232',
     title: "Dọn đường đón Pogba, Real Madrid lên kế hoạch bán công thần",
     desciption:
       "Đội bóng Hoàng gia Tây Ban Nha sẵn sàng bán một trụ cột để dọn đường đón Paul Pogba vào Hè tới.",
@@ -81,6 +81,7 @@ export default function TransferSceen({ navigation }: any) {
         data={dataSource}
         renderItem={({ item }) => (
           <BlockCard
+            key={item.id}
             title={item.title}
             description={item.desciption}
             image={item.image}
